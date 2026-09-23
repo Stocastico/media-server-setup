@@ -24,6 +24,17 @@ transcodes constantly, a cheap streaming box (Google TV Streamer, Apple TV
 4K, Nvidia Shield) running the apps above usually fixes it outright, and is
 often cheaper than the time spent fighting the TV's own OS.
 
+**A note on Wi-Fi clients**: the server itself should stay wired (see
+[02-assembly-and-first-boot.md](02-assembly-and-first-boot.md)), but it's
+completely normal — and what this whole setup assumes — for the TV,
+laptops and phones to connect over the home Wi-Fi instead. For smooth 4K/HDR
+playback, make sure those devices join the **5 GHz** band rather than
+2.4 GHz, and check your router/access point doesn't have "client/AP
+isolation" enabled (some mesh systems and guest networks turn it on by
+default) — it silently blocks the LAN discovery broadcast Jellyfin uses
+(UDP 7359), which shows up as "the app can't find the server" even though
+everything else works fine.
+
 ## Connecting a TV or phone, step by step
 
 1. **Enable Quick Connect once** (lets TVs and other keyboard-less devices
