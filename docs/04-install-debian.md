@@ -9,8 +9,9 @@ Ethernet connected, the two media SSDs still **unplugged**):
 ## The installer, screen by screen
 
 1. **Install** (the graphical installer works too, but the text installer is
-   lighter and perfectly fine for a headless server). Language: English (or
-   your preference). Location and keyboard layout: your own.
+   lighter and perfectly fine for a headless server). Language English or
+   Spanish, location Spain, keyboard Spanish (adjust to your own if
+   different).
 2. **Hostname**: `mediaserver` (or your choice — used throughout this
    guide). Leave the **domain** field empty.
 3. **Root password**: leave it empty/blank. Debian then installs `sudo` and
@@ -24,8 +25,7 @@ Ethernet connected, the two media SSDs still **unplugged**):
    this is exactly why the media SSDs stay unplugged during install) → *All
    files in one partition* → *Finish partitioning and write changes* →
    *Yes*.
-6. **Package mirror**: pick your country, then the default mirror
-   (`deb.debian.org` works everywhere).
+6. **Package mirror**: Spain → `deb.debian.org`.
 7. **Software selection**: **untick** "Debian desktop environment" and
    "GNOME" (this is a headless server, a desktop just wastes RAM/disk and
    widens the attack surface) — **tick** "SSH server" and "standard system

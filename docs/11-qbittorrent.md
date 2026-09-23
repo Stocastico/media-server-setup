@@ -98,8 +98,7 @@ to use qBittorrent more broadly.
 | Creative Commons releases (e.g. Blender Studio's open movies) | Freely redistributable modern shorts/features | — |
 | Your own discs and tapes | Your own rips (a separate project of its own) | Keep the originals |
 
-For free, legal streaming without downloading, check your public broadcaster's
-streaming service (e.g. national/regional public TV platforms) as a
-complement to the server.
+For free, legal streaming in Spanish/Basque without downloading, RTVE Play
+and EITB's Primeran complement the server.
 
 Next: [12-tv-and-device-clients.md](12-tv-and-device-clients.md)
