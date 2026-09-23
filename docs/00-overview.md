@@ -91,6 +91,7 @@ values everywhere they appear, including inside the scripts'
 4. [04-install-debian.md](04-install-debian.md) — the OS installer, screen by screen
 5. [05-first-server-configuration.md](05-first-server-configuration.md) — SSH, drivers, base packages
 6. [06-storage-setup.md](06-storage-setup.md) — the two SSDs, folder layout
+   - [06b-initial-bulk-import.md](06b-initial-bulk-import.md) — bringing in an existing archive from external drives, if you have one (one-time step)
 7. [07-docker-and-samba.md](07-docker-and-samba.md) — container runtime, network share
 8. [08-jellyfin.md](08-jellyfin.md) — video server, hardware transcoding, users
 9. [09-immich.md](09-immich.md) — photos

@@ -49,6 +49,15 @@ Click *Save* at the bottom. If downloads are slow, forward TCP/UDP port
 `6881` to `192.168.1.10` on your router — this is optional and not required
 for it to work.
 
+**Note on speed**: only the *upload* limit above is capped by default —
+**downloads are already unrestricted**, so adding something new pulls at
+full available speed without any extra configuration. The *Alternative
+rate limits* schedule only throttles the evening hours if you set one up;
+you can also flip it on/off instantly at any time with the small
+turtle-shaped icon in the bottom-right corner of the web UI, e.g. to go
+back to full upload speed right after adding something even during the
+scheduled window.
+
 ## 4. Categories for movies and series
 
 1. Left sidebar → right-click *Categories* → *Add category*.

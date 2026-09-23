@@ -97,4 +97,8 @@ language selection can't work for that file. Fix it once with MKVToolNix:
 mkvpropedit file.mkv --edit track:a2 --set language=ita
 ```
 
-Next: [07-docker-and-samba.md](07-docker-and-samba.md)
+If you have an existing archive of ripped DVDs, home videos or photos on
+external drives to bring in, do that now — see
+[06b-initial-bulk-import.md](06b-initial-bulk-import.md). If you're
+starting from an empty library, skip straight to
+[07-docker-and-samba.md](07-docker-and-samba.md).
