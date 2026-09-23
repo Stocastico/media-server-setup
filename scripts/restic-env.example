@@ -1,0 +1,16 @@
+# Copy to /root/.restic-env on the server and fill in your own values:
+#   sudo cp scripts/restic-env.example /root/.restic-env
+#   sudo nano /root/.restic-env
+#   sudo chmod 600 /root/.restic-env
+#
+# Get B2_ACCOUNT_ID / B2_ACCOUNT_KEY from an "application key" you create in
+# the Backblaze B2 web console (not your master account key).
+
+export B2_ACCOUNT_ID=<keyID>
+export B2_ACCOUNT_KEY=<applicationKey>
+export RESTIC_REPOSITORY=b2:<bucket-name>:mediaserver
+
+# Generate one with: openssl rand -base64 32
+# Store it in your password manager. Without it, the backup is
+# unreadable - including by you.
+export RESTIC_PASSWORD=<long random password>

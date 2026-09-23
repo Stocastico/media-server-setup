@@ -1,0 +1,6 @@
+# Local, machine-specific config - never commit real credentials or IPs here
+scripts/config.env
+compose/stack/.env
+compose/immich/.env
+scripts/restic-env
+.DS_Store
