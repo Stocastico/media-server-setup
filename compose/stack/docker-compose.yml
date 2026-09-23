@@ -1,0 +1,107 @@
+# Core + optional services for the media server.
+# Deploy from /opt/stack on the server (see docs/07-jellyfin.md and on).
+#
+# Core services (always started by `docker compose up -d`):
+#   jellyfin, qbittorrent
+#
+# Optional services (only started when their profile is activated):
+#   radarr, sonarr, bazarr   -> profile "subtitles"  (automatic subtitle fetching)
+#   uptime-kuma              -> profile "monitoring" (uptime dashboard + alerts)
+#
+# Examples:
+#   docker compose up -d                                   # core only
+#   docker compose --profile subtitles up -d                # core + Bazarr stack
+#   docker compose --profile subtitles --profile monitoring up -d   # everything
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    user: "${PUID:-1000}:${PGID:-1000}"
+    group_add:
+      - "${RENDER_GID}"          # lets the container use the iGPU
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./config/jellyfin:/config
+      - ./cache/jellyfin:/cache
+      - ${MEDIA_DIR:-/srv/media}:/media:ro   # read-only: Jellyfin can never delete your files
+    ports:
+      - "8096:8096"
+      - "7359:7359/udp"          # LAN auto-discovery for TV/phone apps
+    environment:
+      - TZ=${TZ:-Europe/Madrid}
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Madrid}
+      - WEBUI_PORT=8080
+    volumes:
+      - ./config/qbittorrent:/config
+      - ${MEDIA_DIR:-/srv/media}/downloads:/downloads
+    ports:
+      - "8080:8080"               # web interface
+      - "6881:6881"                # incoming peer connections (TCP)
+      - "6881:6881/udp"            # incoming peer connections (UDP)
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    profiles: ["subtitles"]
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Madrid}
+    volumes:
+      - ./config/radarr:/config
+      - ${MEDIA_DIR:-/srv/media}/movies:/movies
+    ports:
+      - "7878:7878"
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    profiles: ["subtitles"]
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Madrid}
+    volumes:
+      - ./config/sonarr:/config
+      - ${MEDIA_DIR:-/srv/media}/tv:/tv
+    ports:
+      - "8989:8989"
+    restart: unless-stopped
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    profiles: ["subtitles"]
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Madrid}
+    volumes:
+      - ./config/bazarr:/config
+      - ${MEDIA_DIR:-/srv/media}/movies:/movies
+      - ${MEDIA_DIR:-/srv/media}/tv:/tv
+    ports:
+      - "6767:6767"
+    restart: unless-stopped
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    profiles: ["monitoring"]
+    volumes:
+      - ./config/uptime-kuma:/app/data
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
